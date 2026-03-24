@@ -1,24 +1,20 @@
 # FlexConf
 
-**FlexConf** est une application TUI (interface en mode texte) pour Ubuntu/GNOME qui permet de :
-
-- 📸 **Sauvegarder** un snapshot complet de ta configuration actuelle (neovim, btop, kitty, wofi, starship, wallpaper, paramètres GNOME, extensions…)
-- 🎨 **Appliquer** un thème sauvegardé en un seul raccourci
-- 🗂️ **Gérer** plusieurs profils de configuration et basculer entre eux rapidement
+FlexConf is a terminal user interface (TUI) application for Ubuntu/GNOME that lets you snapshot your current desktop configuration and restore it at any time. It manages editor configs, terminal themes, wallpapers, GNOME settings, and more — all from a single command.
 
 ---
 
-## Prérequis
+## Requirements
 
-- Ubuntu 22.04+ (ou toute distribution GNOME)
+- Ubuntu 22.04 or later (any GNOME-based distribution)
 - Python 3.11+
-- `dconf` et `gsettings` disponibles (inclus par défaut sur Ubuntu)
+- `dconf` and `gsettings` (included by default on Ubuntu)
 
 ---
 
 ## Installation
 
-### Depuis le dépôt (recommandé)
+### From source
 
 ```bash
 git clone https://github.com/F3reFli/flexconf.git
@@ -28,67 +24,65 @@ source .venv/bin/activate
 pip install -e .
 ```
 
-### En tant que commande système (optionnel)
+### System-wide (optional)
 
-Pour avoir `flexconf` disponible sans activer le venv à chaque fois :
+To make the `flexconf` command available without activating the virtual environment each time:
 
 ```bash
 pip install --user -e .
 ```
 
-> Assure-toi que `~/.local/bin` est dans ton `PATH`.
+Ensure `~/.local/bin` is in your `PATH`.
 
 ---
 
-## Lancer l'application
+## Usage
 
 ```bash
-# Avec le venv activé
 flexconf
+```
 
-# Ou directement via le module
+Or via the module:
+
+```bash
 python3 -m flexconf
 ```
 
----
+### Key bindings
 
-## Interface TUI
-
-La TUI s'ouvre dans le terminal avec les actions suivantes :
-
-| Touche | Action |
-|--------|--------|
-| `↑` / `↓` | Naviguer entre les thèmes |
-| `Entrée` | Appliquer le thème sélectionné |
-| `s` | Sauvegarder la configuration actuelle comme nouveau thème |
-| `d` | Supprimer le thème sélectionné |
-| `q` | Quitter |
+| Key | Action |
+|-----|--------|
+| `Up` / `Down` | Navigate between themes |
+| `Enter` | Apply the selected theme |
+| `s` | Save the current configuration as a new theme |
+| `d` | Delete the selected theme |
+| `q` | Quit |
 
 ---
 
-## Structure d'un thème
+## Theme structure
 
-Les thèmes sont stockés dans le dossier `themes/<nom>/`. Chaque thème peut contenir :
+Themes are stored under `themes/<name>/`. Each theme directory may contain:
 
 ```
 themes/
-└── MonTheme/
-    ├── manifest.json          # Métadonnées du thème (généré automatiquement)
-    ├── nvim/                  # Config Neovim (~/.config/nvim)
-    ├── btop/                  # Config btop (~/.config/btop)
-    ├── kitty/                 # Config kitty (~/.config/kitty)
-    ├── wofi/                  # Config wofi (~/.config/wofi)
-    ├── starship/              # Config starship (~/.config/starship.toml)
-    ├── wallpaper/             # Fond d'écran GNOME
+└── MyTheme/
+    ├── manifest.json          # Theme metadata (auto-generated)
+    ├── nvim/                  # Neovim config  (~/.config/nvim)
+    ├── btop/                  # btop config    (~/.config/btop)
+    ├── kitty/                 # kitty config   (~/.config/kitty)
+    ├── wofi/                  # wofi config    (~/.config/wofi)
+    ├── starship/              # Starship config (~/.config/starship.toml)
+    ├── wallpaper/             # GNOME wallpaper
     └── ubuntu-settings/
-        └── settings.dconf     # Export dconf /org/gnome/
+        └── settings.dconf     # dconf export of /org/gnome/
 ```
 
-### Exemple de `manifest.json`
+### manifest.json
 
 ```json
 {
-  "theme_name": "MonTheme",
+  "theme_name": "MyTheme",
   "config_targets": {
     "nvim":     { "saved": true, "source": "/home/user/.config/nvim" },
     "btop":     { "saved": true, "source": "/home/user/.config/btop" },
@@ -103,67 +97,63 @@ themes/
 
 ---
 
-## Cibles gérées
+## Managed targets
 
-FlexConf sauvegarde et restaure automatiquement :
-
-| Cible | Source |
-|-------|--------|
+| Target | Source |
+|--------|--------|
 | Neovim | `~/.config/nvim` |
 | btop | `~/.config/btop` |
 | kitty | `~/.config/kitty` |
 | wofi | `~/.config/wofi` |
 | Starship | `~/.config/starship.toml` |
-| Wallpaper GNOME | via `gsettings` |
-| Paramètres GNOME | via `dconf dump/load /org/gnome/` |
-| Extensions GNOME | via `dconf` |
-| Profil Firefox | détecté automatiquement |
+| GNOME wallpaper | via `gsettings` |
+| GNOME settings | via `dconf dump/load /org/gnome/` |
+| GNOME extensions | via `dconf` |
+| Firefox profile | auto-detected |
 
 ---
 
-## Variables d'environnement
+## Environment variables
 
 | Variable | Description |
 |----------|-------------|
-| `FLEXCONF_HOME` | Remplace le home utilisateur cible (utile pour les tests) |
-| `FLEXCONF_THEMES_DIR` | Remplace le dossier `themes/` par un chemin personnalisé |
+| `FLEXCONF_HOME` | Override the target user home directory |
+| `FLEXCONF_THEMES_DIR` | Override the themes directory path |
 
-Exemple :
+Example:
 
 ```bash
-FLEXCONF_THEMES_DIR=~/mes-themes flexconf
+FLEXCONF_THEMES_DIR=~/my-themes flexconf
 ```
 
 ---
 
-## Développement
+## Development
 
-### Lancer les tests
+### Running tests
 
 ```bash
 python3 -m pytest tests/ -v
-# ou
-python3 -m unittest discover -s tests -v
 ```
 
-### Structure du projet
+### Project layout
 
 ```
 flexconf/
 ├── src/
 │   └── flexconf/
-│       ├── cli.py       # Point d'entrée
-│       ├── config.py    # Chemins et configuration
-│       ├── manager.py   # Logique sauvegarde/restauration
-│       └── tui.py       # Interface TUI
+│       ├── cli.py        # Entry point
+│       ├── config.py     # Path resolution and configuration
+│       ├── manager.py    # Save and restore logic
+│       └── tui.py        # Terminal UI
 ├── tests/
 │   └── test_manager.py
-├── themes/              # Tes thèmes (non versionnés)
+├── themes/               # Your themes (not tracked by git)
 └── pyproject.toml
 ```
 
 ---
 
-## Licence
+## License
 
-Ce projet est open-source. Fais-en bon usage ! 🚀
+This project is open-source.
