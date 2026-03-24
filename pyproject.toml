@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flexconf"
+version = "0.1.0"
+description = "TUI pour sauvegarder et appliquer des themes Ubuntu."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "Copilot" }
+]
+
+[project.scripts]
+flexconf = "flexconf.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
