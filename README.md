@@ -1,4 +1,14 @@
+<div align="center">
+
 # FlexConf
+
+![Ubuntu](https://img.shields.io/badge/Ubuntu-000000?style=for-the-badge&logo=ubuntu&logoColor=white)
+![GNOME](https://img.shields.io/badge/GNOME-000000?style=for-the-badge&logo=gnome&logoColor=white)
+![Python](https://img.shields.io/badge/Python-000000?style=for-the-badge&logo=python&logoColor=white)
+![Neovim](https://img.shields.io/badge/NeoVim-000000?style=for-the-badge&logo=neovim&logoColor=white)
+![Kitty](https://img.shields.io/badge/Kitty-000000?style=for-the-badge&logo=gnometerminal&logoColor=white)
+
+</div>
 
 FlexConf is a terminal user interface (TUI) application for Ubuntu/GNOME that lets you snapshot your current desktop configuration and restore it at any time. It manages editor configs, terminal themes, wallpapers, GNOME settings, and more — all from a single command.
 
