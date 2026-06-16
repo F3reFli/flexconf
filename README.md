@@ -16,9 +16,12 @@ FlexConf is a terminal user interface (TUI) application for Ubuntu/GNOME that le
 
 ## Requirements
 
-- Ubuntu 22.04 or later (any GNOME-based distribution)
-- Python 3.11+
+- Ubuntu 22.04 → 26.04 LTS (any GNOME-based distribution)
+- Python 3.11+ (tested up to Python 3.14)
 - `dconf` and `gsettings` (included by default on Ubuntu)
+
+On startup FlexConf probes the host and tells you up front if `dconf`/`gsettings`
+are missing or if a non-GNOME desktop is detected, instead of failing mid-operation.
 
 ---
 
@@ -58,15 +61,21 @@ Or via the module:
 python3 -m flexconf
 ```
 
+On launch you get an animated splash screen that detects your environment and
+loads the available themes, then a colored, boxed menu: **Choisir un thème**
+(apply a theme, with a confirmation step), **Prendre un snapshot** (save the
+current configuration), and **Quitter**.
+
 ### Key bindings
 
 | Key | Action |
 |-----|--------|
-| `Up` / `Down` | Navigate between themes |
-| `Enter` | Apply the selected theme |
-| `s` | Save the current configuration as a new theme |
-| `d` | Delete the selected theme |
-| `q` | Quit |
+| `↑` / `↓` or `k` / `j` | Move the selection |
+| `PgUp` / `PgDn`, `Home` / `End` | Jump through long lists |
+| `Enter` | Validate the highlighted entry |
+| `←` / `→` or `y` / `n` | Answer a confirmation dialog |
+| `q` / `Esc` | Go back / quit |
+| any key | Skip the splash animation |
 
 ---
 
