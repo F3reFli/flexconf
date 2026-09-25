@@ -164,6 +164,14 @@ flexconf/
 
 ---
 
+## Contributing
+
+1. Fork the repository and create a branch from `main`.
+2. Run the test suite with `python3 -m pytest tests/ -v`.
+3. Open a pull request describing your change.
+
+---
+
 ## License
 
 This project is open-source.
