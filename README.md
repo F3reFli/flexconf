@@ -10,7 +10,7 @@
 
 </div>
 
-FlexConf is a TUI for Ubuntu/GNOME to save and apply your desktop themes in one command.
+FlexConf is a TUI for Ubuntu/GNOME to save and apply your desktop themes in one command. It snapshots Neovim, btop, kitty, wofi, Starship, wallpaper, GNOME settings and extensions, and your Firefox profile, and restores them at any time.
 
 ---
 
