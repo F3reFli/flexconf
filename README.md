@@ -10,7 +10,7 @@
 
 </div>
 
-FlexConf is a terminal user interface (TUI) application for Ubuntu/GNOME that lets you snapshot your current desktop configuration and restore it at any time. It manages editor configs, terminal themes, wallpapers, GNOME settings, and more — all from a single command.
+FlexConf is a terminal user interface (TUI) application for Ubuntu/GNOME that lets you snapshot your current desktop configuration (Neovim, btop, kitty, wofi, Starship, wallpaper, GNOME settings and extensions, Firefox profile) and restore it at any time.
 
 ---
 
